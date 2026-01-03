@@ -1,31 +1,26 @@
-# 🎨 Marker Shuffler
+# 🎨 Marker Picker
 
-**Marker Shuffler** is a small app I’m building to remove decision fatigue when coloring with alcohol markers.
+Overthinking kills momentum. Marker Picker exists to fix that.
 
-It helps you pick a marker so you can start coloring instead of staring at your collection wondering where to begin.
+**Marker Picker** is a small app I’m building to remove decision fatigue when coloring.
 
-## The Problem
-
-Choosing a color is easy—until you own a lot of markers.
-Then “just starting” becomes the hardest part.
-
-Overthinking kills momentum. Marker Shuffler exists to fix that.
+It helps you pick a marker so you can just start, instead of staring at your collection wondering where to begin.
 
 ## The Solution
 
-* Pick (or shuffle) a marker from a defined set or palette
+* Pick a marker from a defined set or palette
 * Reduce friction
 * Get coloring faster
-
-No setup rabbit holes. No feature overload. Just action.
 
 ## Current Capabilities
 
 * Simple marker selection
 * Minimal UI designed to stay out of the way
-* Built for speed, not perfection
 
 ## What’s Next
+
+* **Multiple random picks**
+  Decide the number of colors you want to be chosen for you all at once, and color away!
 
 * **Marker Sets**
   Create and choose from predefined sets (e.g. *SFAIH 101-count*, custom collections, etc.)
@@ -36,10 +31,8 @@ No setup rabbit holes. No feature overload. Just action.
 * **Split Screens (Coloring With Friends)**
   Multiple side-by-side pickers so each person can use their own marker set and/or palette while coloring together.
 
-## Status
-
-🛠️ Actively building. Shipping incrementally.
 
 ## Why This Exists
 
-Because starting matters more than choosing the “right” color.
+- Because starting matters more than choosing the “right” color.
+- I get to learn React and how to build small web apps with intention.
