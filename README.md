@@ -6,6 +6,10 @@ Overthinking kills momentum. Marker Picker exists to fix that.
 
 It helps you pick a marker so you can just start, instead of staring at your collection wondering where to begin.
 
+![Initial page](src/assets/readme-screenshot-01.png)
+![Created a specific set of markers](src/assets/readme-screenshot-02.png)
+![Randomly picked a marker from the set](src/assets/readme-screenshot-03.png)
+
 ## The Solution
 
 * Pick a marker from a defined set or palette
