@@ -26,42 +26,51 @@ function App() {
         const selectedIndex = markerSet.markers.findIndex(m => m.code === newPick.code);
         
         const totalMarkers = markerSet.markers.length;
-        const viewportWidth = stripRef.current?.parentElement?.clientWidth || window.innerWidth;
         
         // Change the key to force remount - this resets everything cleanly
         setStripKey(prev => prev + 1);
         setScrollPosition(0); // Start from 0
         
         // Calculate final position: multiple full scrolls + position of selected marker
-        // We have 5 sets of markers, so we need to ensure we stay within bounds
-        const fullScrolls = 3 + Math.random() * 2; // 3-5 full scrolls
+        // We have 5 sets of markers (0-4), so we need to ensure we stay within bounds
         const maxSets = 5;
+        const fullScrolls = 3 + Math.random() * 2; // 3-5 full scrolls
         
-        // Use modulo to wrap the scroll distance within our available sets
-        // This ensures we never exceed the available markers
-        const scrollDistance = (fullScrolls * totalMarkers * cardWidth) % (maxSets * totalMarkers * cardWidth);
+        // Target the selected marker in set 2 (middle set) - safe choice
+        const targetSet = 2;
         
-        // Target the selected marker in set 1 (second set) - safe choice
-        const targetSet = 1;
-        const targetPosition = (targetSet * totalMarkers + selectedIndex) * cardWidth;
+        // Calculate the position of the selected marker in the target set (left edge)
+        // Each set has totalMarkers markers, so set 2 starts at 2 * totalMarkers
+        const targetMarkerIndex = (targetSet * totalMarkers) + selectedIndex;
+        const targetPosition = targetMarkerIndex * cardWidth;
         
-        // Final position: wrapped scroll + target
-        let finalPosition = scrollDistance + targetPosition;
-        
-        // Ensure we don't exceed max - if we do, wrap to an earlier set
+        // Calculate scroll distance - scroll through multiple full sets, but wrap to stay within bounds
         const maxPosition = maxSets * totalMarkers * cardWidth;
+        const rawScrollDistance = fullScrolls * totalMarkers * cardWidth;
+        const wrappedScrollDistance = rawScrollDistance % maxPosition;
+        
+        // Final position: wrapped scroll distance + target position
+        // If this exceeds max, use modulo to wrap
+        let finalPosition = wrappedScrollDistance + targetPosition;
         if (finalPosition >= maxPosition) {
-            // Wrap to set 0 with the same marker
+            // Wrap: use the target position in set 0 instead
             finalPosition = selectedIndex * cardWidth;
         }
         
-        // Center the selected marker in the viewport
-        const centeredPosition = finalPosition - (viewportWidth / 2) + (cardWidth / 2);
-        
-        // Wait for remount to complete, then start animation
+        // Wait for remount to get accurate viewport width
         setTimeout(() => {
+            const viewportWidth = stripRef.current?.parentElement?.clientWidth || window.innerWidth;
+            const actualCardWidth = 100; // Card width is 100px (cardWidth includes 20px margin)
+            
+            // Center the selected marker in the viewport
+            // finalPosition is the left edge, so card center is finalPosition + (actualCardWidth / 2)
+            const markerCenterPosition = finalPosition + (actualCardWidth / 2);
+            // Scroll position to center: align marker center with viewport center
+            const centeredPosition = markerCenterPosition - (viewportWidth / 2);
+            
             setScrollPosition(centeredPosition);
         }, 50);
+        
         
         // Wait for animation to complete
         setTimeout(() => {
@@ -138,6 +147,7 @@ function App() {
                         </div>
                         <div className="strip-indicator-left"></div>
                         <div className="strip-indicator-right"></div>
+                        <div className="strip-pointer"></div>
                     </div>
                     
                     {markerPick && !isScrolling && (
