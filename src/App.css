@@ -1,42 +1,223 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.app-title {
   text-align: center;
+  margin: 0.5rem 0 0.75rem 0;
+  font-size: 2rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.top-section {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bottom-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.grids-container {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.card {
-  padding: 2em;
+.marker-grid-header {
+  margin-bottom: 1rem;
 }
 
-.read-the-docs {
+.marker-grid-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.marker-count {
+  margin: 0;
   color: #888;
+  font-size: 0.9rem;
+}
+
+.marker-grid-left,
+.marker-grid-right {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.02);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.marker-card {
+  aspect-ratio: 2/1;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 50px;
+  width: 100px;
+}
+
+.marker-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.marker-code {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.marker-name {
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
+.random-pick-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.random-pick-section h2 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+}
+
+.random-pick-button {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  background-color: #646cff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.1s;
+  margin-bottom: 0.75rem;
+}
+
+.random-pick-button:hover:not(:disabled) {
+  background-color: #535bf2;
+  transform: translateY(-2px);
+}
+
+.random-pick-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.random-pick-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.random-pick-result {
+  text-align: center;
+  width: 100%;
+  max-width: 350px;
+}
+
+.random-pick-result h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.selected-marker {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid currentColor;
+  margin-bottom: 0.5rem;
+}
+
+.selected-marker-code {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.selected-marker-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.selected-marker-hex {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  font-family: monospace;
+}
+
+.happy-coloring {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.app-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .top-section {
+    flex: 0 0 auto;
+  }
+  
+  .bottom-section {
+    flex: 1;
+  }
+  
+  .grids-container {
+    flex-direction: column;
+  }
+  
+  .marker-grid-left,
+  .marker-grid-right {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+  }
+  
+  .marker-card {
+    min-height: 50px;
+  }
+  
+  .marker-code {
+    font-size: 0.6rem;
+  }
+  
+  .marker-name {
+    font-size: 0.5rem;
+  }
 }
